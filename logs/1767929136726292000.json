@@ -1,0 +1,108 @@
+{
+  "timestamp": "2026-01-09T11:25:36.726292+08:00",
+  "method": "POST",
+  "path": "/v1/messages",
+  "headers": {
+    "Accept": [
+      "application/json"
+    ],
+    "Accept-Encoding": [
+      "gzip, deflate, br, zstd"
+    ],
+    "Anthropic-Beta": [
+      "interleaved-thinking-2025-05-14"
+    ],
+    "Anthropic-Dangerous-Direct-Browser-Access": [
+      "true"
+    ],
+    "Anthropic-Version": [
+      "2023-06-01"
+    ],
+    "Authorization": [
+      "Bearer cr_fd21852e21edcc1edefbed6dad81c1e5e69a5e3f7bf2eb91dfb183b174704cb8"
+    ],
+    "Connection": [
+      "keep-alive"
+    ],
+    "Content-Length": [
+      "931"
+    ],
+    "Content-Type": [
+      "application/json"
+    ],
+    "User-Agent": [
+      "claude-cli/2.1.2 (external, sdk-cli)"
+    ],
+    "X-App": [
+      "cli"
+    ],
+    "X-Stainless-Arch": [
+      "arm64"
+    ],
+    "X-Stainless-Lang": [
+      "js"
+    ],
+    "X-Stainless-Os": [
+      "MacOS"
+    ],
+    "X-Stainless-Package-Version": [
+      "0.70.0"
+    ],
+    "X-Stainless-Retry-Count": [
+      "0"
+    ],
+    "X-Stainless-Runtime": [
+      "node"
+    ],
+    "X-Stainless-Runtime-Version": [
+      "v24.3.0"
+    ],
+    "X-Stainless-Timeout": [
+      "600"
+    ]
+  },
+  "body": {
+    "max_tokens": 21333,
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Files modified by user:\n\n\nFiles modified by other users:\n",
+            "type": "text"
+          }
+        ],
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "user_id": "user_c19a526d5d1c4e29ae2cee86a792346dfa84337536b775d49e7ce9477bc6684b_account__session_0a256beb-13a2-4395-b599-b1d8789f259a"
+    },
+    "model": "claude-haiku-4-5-20251001",
+    "system": [
+      {
+        "text": "You are Claude Code, Anthropic's official CLI for Claude.",
+        "type": "text"
+      },
+      {
+        "text": "You are an expert at analyzing git history. Given a list of files and their modification counts, return exactly five filenames that are frequently modified and represent core application logic (not auto-generated files, dependencies, or configuration). Make sure filenames are diverse, not all in the same folder, and are a mix of user and other users. Return only the filenames' basenames (without the path) separated by newlines with no explanation.",
+        "type": "text"
+      }
+    ],
+    "temperature": 1,
+    "tools": []
+  },
+  "response": {
+    "content": [
+      {
+        "text": "I'm Claude, an AI assistant made by Anthropic. I'm running as Claude Code, Anthropic's CLI tool for software engineering tasks. I'm powered by the Claude Opus 4.5 model.\n\nI can help you with:\n- Reading, writing, and editing code\n- Running bash commands\n- Exploring codebases\n- Debugging issues\n- Planning implementations\n- Answering questions about your projects\n\nWhat can I help you with?",
+        "type": "text"
+      }
+    ],
+    "id": "msg_mock_1767929136726308000",
+    "model": "claude-opus-4-5-20251101",
+    "role": "assistant",
+    "stop_reason": "end_turn",
+    "type": "message"
+  },
+  "duration": "22.542µs"
+}

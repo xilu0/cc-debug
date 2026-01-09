@@ -1,0 +1,3291 @@
+{
+  "timestamp": "2026-01-09T11:25:36.71581+08:00",
+  "method": "POST",
+  "path": "/v1/messages",
+  "headers": {
+    "Accept": [
+      "application/json"
+    ],
+    "Accept-Encoding": [
+      "gzip, deflate, br, zstd"
+    ],
+    "Anthropic-Beta": [
+      "claude-code-20250219,interleaved-thinking-2025-05-14"
+    ],
+    "Anthropic-Dangerous-Direct-Browser-Access": [
+      "true"
+    ],
+    "Anthropic-Version": [
+      "2023-06-01"
+    ],
+    "Authorization": [
+      "Bearer cr_fd21852e21edcc1edefbed6dad81c1e5e69a5e3f7bf2eb91dfb183b174704cb8"
+    ],
+    "Connection": [
+      "keep-alive"
+    ],
+    "Content-Length": [
+      "15376"
+    ],
+    "Content-Type": [
+      "application/json"
+    ],
+    "User-Agent": [
+      "claude-cli/2.1.2 (external, sdk-cli)"
+    ],
+    "X-App": [
+      "cli"
+    ],
+    "X-Stainless-Arch": [
+      "arm64"
+    ],
+    "X-Stainless-Helper-Method": [
+      "stream"
+    ],
+    "X-Stainless-Lang": [
+      "js"
+    ],
+    "X-Stainless-Os": [
+      "MacOS"
+    ],
+    "X-Stainless-Package-Version": [
+      "0.70.0"
+    ],
+    "X-Stainless-Retry-Count": [
+      "0"
+    ],
+    "X-Stainless-Runtime": [
+      "node"
+    ],
+    "X-Stainless-Runtime-Version": [
+      "v24.3.0"
+    ],
+    "X-Stainless-Timeout": [
+      "600"
+    ]
+  },
+  "body": {
+    "max_tokens": 32000,
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "\u003csystem-reminder\u003e\nAs you answer the user's questions, you can use the following context:\n# claudeMd\nCodebase and user instructions are shown below. Be sure to adhere to these instructions. IMPORTANT: These instructions OVERRIDE any default behavior and you MUST follow them exactly as written.\n\nContents of /Users/linwang/src/github/xiluo/cc-debug/CLAUDE.md (project instructions, checked into the codebase):\n\n# CLAUDE.md\n\nThis file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\n\n## Project Overview\n\ncc-debug is a Claude API debug proxy written in Go. It intercepts Claude client requests, logs them to console or JSON files, and supports streaming responses.\n\n## Build and Run Commands\n\n```bash\n# Build\ngo build -o cc-debug ./cmd/server\n\n# Run\n./cc-debug -port 8080 -output console    # Log to console\n./cc-debug -port 8080 -output json       # Save to JSON files\n\n# Test\ngo test ./...\n\n# Run single test\ngo test -run TestName ./path/to/package\n```\n\n## Architecture\n\n```\ncmd/server/         - Main entry point\ninternal/\n  proxy/            - HTTP proxy handler for Claude API requests\n  logger/           - Request/response logging (console and JSON output)\n  stream/           - SSE stream handling for streaming responses\n```\n\nThe proxy intercepts requests to Claude's Messages API, logs the full request/response cycle, then forwards to the actual Claude API and streams responses back to the client.\n\n\n      IMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.\n\u003c/system-reminder\u003e\n",
+            "type": "text"
+          },
+          {
+            "cache_control": {
+              "type": "ephemeral"
+            },
+            "text": "Warmup",
+            "type": "text"
+          }
+        ],
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "user_id": "user_c19a526d5d1c4e29ae2cee86a792346dfa84337536b775d49e7ce9477bc6684b_account__session_0a256beb-13a2-4395-b599-b1d8789f259a"
+    },
+    "model": "claude-opus-4-5-20251101",
+    "stream": true,
+    "system": [
+      {
+        "cache_control": {
+          "type": "ephemeral"
+        },
+        "text": "You are Claude Code, Anthropic's official CLI for Claude.",
+        "type": "text"
+      },
+      {
+        "cache_control": {
+          "type": "ephemeral"
+        },
+        "text": "You are a command execution specialist for Claude Code. Your role is to execute bash commands efficiently and safely.\n\nGuidelines:\n- Execute commands precisely as instructed\n- For git operations, follow git safety protocols\n- Report command output clearly and concisely\n- If a command fails, explain the error and suggest solutions\n- Use command chaining (\u0026\u0026) for dependent operations\n- Quote paths with spaces properly\n- For clear communication, avoid using emojis\n\nComplete the requested operations efficiently.\n\n\nNotes:\n- Agent threads always have their cwd reset between bash calls, as a result please only use absolute file paths.\n- In your final response always share relevant file names and code snippets. Any file paths you return in your response MUST be absolute. Do NOT use relative paths.\n- For clear communication with the user the assistant MUST avoid using emojis.\n- Do not use a colon before tool calls. Text like \"Let me read the file:\" followed by a read tool call should just be \"Let me read the file.\" with a period.\n\nHere is useful information about the environment you are running in:\n\u003cenv\u003e\nWorking directory: /Users/linwang/src/github/xiluo/cc-debug\nIs directory a git repo: Yes\nPlatform: darwin\nOS Version: Darwin 24.6.0\nToday's date: 2026-01-09\n\u003c/env\u003e\nYou are powered by the model named Opus 4.5. The exact model ID is claude-opus-4-5-20251101.\n\nAssistant knowledge cutoff is May 2025.\n\n\u003cclaude_background_info\u003e\nThe most recent frontier Claude model is Claude Opus 4.5 (model ID: 'claude-opus-4-5-20251101').\n\u003c/claude_background_info\u003e\n\ngitStatus: This is the git status at the start of the conversation. Note that this status is a snapshot in time, and will not update during the conversation.\nCurrent branch: main\n\nMain branch (you will usually use this for PRs): \n\nStatus:\n?? CLAUDE.md\n?? cc-debug\n?? cmd/\n?? go.mod\n?? go.sum\n?? internal/\n\nRecent commits:\n",
+        "type": "text"
+      }
+    ],
+    "tools": [
+      {
+        "description": "Executes a given bash command in a persistent shell session with optional timeout, ensuring proper handling and security measures.\n\nIMPORTANT: This tool is for terminal operations like git, npm, docker, etc. DO NOT use it for file operations (reading, writing, editing, searching, finding files) - use the specialized tools for this instead.\n\nBefore executing the command, please follow these steps:\n\n1. Directory Verification:\n   - If the command will create new directories or files, first use `ls` to verify the parent directory exists and is the correct location\n   - For example, before running \"mkdir foo/bar\", first use `ls foo` to check that \"foo\" exists and is the intended parent directory\n\n2. Command Execution:\n   - Always quote file paths that contain spaces with double quotes (e.g., cd \"path with spaces/file.txt\")\n   - Examples of proper quoting:\n     - cd \"/Users/name/My Documents\" (correct)\n     - cd /Users/name/My Documents (incorrect - will fail)\n     - python \"/path/with spaces/script.py\" (correct)\n     - python /path/with spaces/script.py (incorrect - will fail)\n   - After ensuring proper quoting, execute the command.\n   - Capture the output of the command.\n\nUsage notes:\n  - The command argument is required.\n  - You can specify an optional timeout in milliseconds (up to 600000ms / 10 minutes). If not specified, commands will timeout after 120000ms (2 minutes).\n  - It is very helpful if you write a clear, concise description of what this command does in 5-10 words.\n  - If the output exceeds 30000 characters, output will be truncated before being returned to you.\n  - You can use the `run_in_background` parameter to run the command in the background. Only use this if you don't need the result immediately and are OK being notified when the command completes later. You do not need to check the output right away - you'll be notified when it finishes. You do not need to use '\u0026' at the end of the command when using this parameter.\n  \n  - Avoid using Bash with the `find`, `grep`, `cat`, `head`, `tail`, `sed`, `awk`, or `echo` commands, unless explicitly instructed or when these commands are truly necessary for the task. Instead, always prefer using the dedicated tools for these commands:\n    - File search: Use Glob (NOT find or ls)\n    - Content search: Use Grep (NOT grep or rg)\n    - Read files: Use Read (NOT cat/head/tail)\n    - Edit files: Use Edit (NOT sed/awk)\n    - Write files: Use Write (NOT echo \u003e/cat \u003c\u003cEOF)\n    - Communication: Output text directly (NOT echo/printf)\n  - When issuing multiple commands:\n    - If the commands are independent and can run in parallel, make multiple Bash tool calls in a single message. For example, if you need to run \"git status\" and \"git diff\", send a single message with two Bash tool calls in parallel.\n    - If the commands depend on each other and must run sequentially, use a single Bash call with '\u0026\u0026' to chain them together (e.g., `git add . \u0026\u0026 git commit -m \"message\" \u0026\u0026 git push`). For instance, if one operation must complete before another starts (like mkdir before cp, Write before Bash for git operations, or git add before git commit), run these operations sequentially instead.\n    - Use ';' only when you need to run commands sequentially but don't care if earlier commands fail\n    - DO NOT use newlines to separate commands (newlines are ok in quoted strings)\n  - Try to maintain your current working directory throughout the session by using absolute paths and avoiding usage of `cd`. You may use `cd` if the User explicitly requests it.\n    \u003cgood-example\u003e\n    pytest /foo/bar/tests\n    \u003c/good-example\u003e\n    \u003cbad-example\u003e\n    cd /foo/bar \u0026\u0026 pytest tests\n    \u003c/bad-example\u003e\n\n# Committing changes with git\n\nOnly create commits when requested by the user. If unclear, ask first. When the user asks you to create a new git commit, follow these steps carefully:\n\nGit Safety Protocol:\n- NEVER update the git config\n- NEVER run destructive/irreversible git commands (like push --force, hard reset, etc) unless the user explicitly requests them\n- NEVER skip hooks (--no-verify, --no-gpg-sign, etc) unless the user explicitly requests it\n- NEVER run force push to main/master, warn the user if they request it\n- Avoid git commit --amend. ONLY use --amend when ALL conditions are met:\n  (1) User explicitly requested amend, OR commit SUCCEEDED but pre-commit hook auto-modified files that need including\n  (2) HEAD commit was created by you in this conversation (verify: git log -1 --format='%an %ae')\n  (3) Commit has NOT been pushed to remote (verify: git status shows \"Your branch is ahead\")\n- CRITICAL: If commit FAILED or was REJECTED by hook, NEVER amend - fix the issue and create a NEW commit\n- CRITICAL: If you already pushed to remote, NEVER amend unless user explicitly requests it (requires force push)\n- NEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.\n\n1. You can call multiple tools in a single response. When multiple independent pieces of information are requested and all commands are likely to succeed, run multiple tool calls in parallel for optimal performance. run the following bash commands in parallel, each using the Bash tool:\n  - Run a git status command to see all untracked files.\n  - Run a git diff command to see both staged and unstaged changes that will be committed.\n  - Run a git log command to see recent commit messages, so that you can follow this repository's commit message style.\n2. Analyze all staged changes (both previously staged and newly added) and draft a commit message:\n  - Summarize the nature of the changes (eg. new feature, enhancement to an existing feature, bug fix, refactoring, test, docs, etc.). Ensure the message accurately reflects the changes and their purpose (i.e. \"add\" means a wholly new feature, \"update\" means an enhancement to an existing feature, \"fix\" means a bug fix, etc.).\n  - Do not commit files that likely contain secrets (.env, credentials.json, etc). Warn the user if they specifically request to commit those files\n  - Draft a concise (1-2 sentences) commit message that focuses on the \"why\" rather than the \"what\"\n  - Ensure it accurately reflects the changes and their purpose\n3. You can call multiple tools in a single response. When multiple independent pieces of information are requested and all commands are likely to succeed, run multiple tool calls in parallel for optimal performance. run the following commands:\n   - Add relevant untracked files to the staging area.\n   - Create the commit with a message ending with:\n   Co-Authored-By: Claude Opus 4.5 \u003cnoreply@anthropic.com\u003e\n   - Run git status after the commit completes to verify success.\n   Note: git status depends on the commit completing, so run it sequentially after the commit.\n4. If the commit fails due to pre-commit hook, fix the issue and create a NEW commit (see amend rules above)\n\nImportant notes:\n- NEVER run additional commands to read or explore code, besides git bash commands\n- NEVER use the TodoWrite or Task tools\n- DO NOT push to the remote repository unless the user explicitly asks you to do so\n- IMPORTANT: Never use git commands with the -i flag (like git rebase -i or git add -i) since they require interactive input which is not supported.\n- If there are no changes to commit (i.e., no untracked files and no modifications), do not create an empty commit\n- In order to ensure good formatting, ALWAYS pass the commit message via a HEREDOC, a la this example:\n\u003cexample\u003e\ngit commit -m \"$(cat \u003c\u003c'EOF'\n   Commit message here.\n\n   Co-Authored-By: Claude Opus 4.5 \u003cnoreply@anthropic.com\u003e\n   EOF\n   )\"\n\u003c/example\u003e\n\n# Creating pull requests\nUse the gh command via the Bash tool for ALL GitHub-related tasks including working with issues, pull requests, checks, and releases. If given a Github URL use the gh command to get the information needed.\n\nIMPORTANT: When the user asks you to create a pull request, follow these steps carefully:\n\n1. You can call multiple tools in a single response. When multiple independent pieces of information are requested and all commands are likely to succeed, run multiple tool calls in parallel for optimal performance. run the following bash commands in parallel using the Bash tool, in order to understand the current state of the branch since it diverged from the main branch:\n   - Run a git status command to see all untracked files\n   - Run a git diff command to see both staged and unstaged changes that will be committed\n   - Check if the current branch tracks a remote branch and is up to date with the remote, so you know if you need to push to the remote\n   - Run a git log command and `git diff [base-branch]...HEAD` to understand the full commit history for the current branch (from the time it diverged from the base branch)\n2. Analyze all changes that will be included in the pull request, making sure to look at all relevant commits (NOT just the latest commit, but ALL commits that will be included in the pull request!!!), and draft a pull request summary\n3. You can call multiple tools in a single response. When multiple independent pieces of information are requested and all commands are likely to succeed, run multiple tool calls in parallel for optimal performance. run the following commands in parallel:\n   - Create new branch if needed\n   - Push to remote with -u flag if needed\n   - Create PR using gh pr create with the format below. Use a HEREDOC to pass the body to ensure correct formatting.\n\u003cexample\u003e\ngh pr create --title \"the pr title\" --body \"$(cat \u003c\u003c'EOF'\n## Summary\n\u003c1-3 bullet points\u003e\n\n## Test plan\n[Bulleted markdown checklist of TODOs for testing the pull request...]\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\nEOF\n)\"\n\u003c/example\u003e\n\nImportant:\n- DO NOT use the TodoWrite or Task tools\n- Return the PR URL when you're done, so the user can see it\n\n# Other common operations\n- View comments on a Github PR: gh api repos/foo/bar/pulls/123/comments",
+        "input_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "additionalProperties": false,
+          "properties": {
+            "command": {
+              "description": "The command to execute",
+              "type": "string"
+            },
+            "dangerouslyDisableSandbox": {
+              "description": "Set this to true to dangerously override sandbox mode and run commands without sandboxing.",
+              "type": "boolean"
+            },
+            "description": {
+              "description": "Clear, concise description of what this command does in 5-10 words, in active voice. Examples:\nInput: ls\nOutput: List files in current directory\n\nInput: git status\nOutput: Show working tree status\n\nInput: npm install\nOutput: Install package dependencies\n\nInput: mkdir foo\nOutput: Create directory 'foo'",
+              "type": "string"
+            },
+            "run_in_background": {
+              "description": "Set to true to run this command in the background. Use TaskOutput to read the output later.",
+              "type": "boolean"
+            },
+            "timeout": {
+              "description": "Optional timeout in milliseconds (max 600000)",
+              "type": "number"
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "type": "object"
+        },
+        "name": "Bash"
+      }
+    ]
+  },
+  "stream_chunks": [
+    {
+      "message": {
+        "content": [],
+        "id": "msg_mock_1767929136718197000",
+        "model": "claude-opus-4-5-20251101",
+        "role": "assistant",
+        "type": "message"
+      },
+      "type": "message_start"
+    },
+    {
+      "content_block": {
+        "text": "",
+        "type": "text"
+      },
+      "index": 0,
+      "type": "content_block_start"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "'",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "C",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ",",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "A",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "b",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "y",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "A",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ".",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "'",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "C",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "C",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ",",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "A",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "'",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "C",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "L",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "f",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "f",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "w",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "k",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ".",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "'",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "w",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "b",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "y",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "C",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "O",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "4",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ".",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "5",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ".",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "y",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "w",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ":",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "-",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "R",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ",",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "w",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": ",",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "-",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "R",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "b",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "-",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "E",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "x",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "d",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "b",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "-",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "D",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "b",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "-",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "P",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "m",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "-",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "A",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "w",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "g",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "q",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "b",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "y",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "r",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "j",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "s",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "\n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "W",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "c",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "a",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "n",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "I",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "e",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "l",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "p",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "y",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "o",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "u",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": " ",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "w",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "i",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "t",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "h",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "delta": {
+        "text": "?",
+        "type": "text_delta"
+      },
+      "index": 0,
+      "type": "content_block_delta"
+    },
+    {
+      "index": 0,
+      "type": "content_block_stop"
+    },
+    {
+      "delta": {
+        "stop_reason": "end_turn"
+      },
+      "type": "message_delta"
+    },
+    {
+      "type": "message_stop"
+    }
+  ],
+  "duration": "2.198490417s"
+}
